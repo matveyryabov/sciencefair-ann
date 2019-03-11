@@ -1,57 +1,71 @@
+import java.util.Arrays;
 import java.io.BufferedReader;
 import java.util.Random; 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Main {
-	static Matrix m1;
-	static Matrix m2;
-	static Matrix m3;
-	
-	
-	
-	
+public class Main {	
 	public static void main(String[] args) {
-//		m1 = new Matrix(2, 2);
-//		m2 = new Matrix(2, 2);
-//		Matrix.randomize(m1.data, 0, 10);  
-//		Matrix.randomize(m2.data, 0, 10);
-//		Matrix.displayAsTable(m1.data);
-//		//LEARN ABOUT THIS HOLY GRAIL - LAMBDA
-//	    Matrix.map(m1, x -> sigmoid(x));
-//		Matrix.displayAsTable(m2.data);
-//		m3= Matrix.findDiffrence(m1, m2);
-//	 	Matrix.displayAsTable(m3.data);
-	
-
+		//Create a config file system and place these in there
+		int number_of_input_nodes = 10;
+		int number_of_output_nodes = 9;
+		int number_of_hidden_nodes = 10;
 		
-		Tests.xor();
+		//Create a neural net
+		NeuralNetwork nn = new NeuralNetwork(number_of_input_nodes, number_of_hidden_nodes, number_of_output_nodes);
+		Random rand = new Random(); 
+		
+		//stuff we might wanna change based on dataset
+		String file_path = "C:\\git\\sciencefair-ann\\csv.csv";
+		
+		//Replace with a function which counts the number of lines in a file.
+		int lines_in_file = 45000;
+		
+		//Represents the place the target value is in the list
+		int target_value_place = 11;
+		
+		//Initialize the target and input arrays
+		double[] target_arr = new double[number_of_output_nodes];
+        double[] input_arr = new double[number_of_input_nodes];
+		
+        BufferedReader br = null;
+        String line = " ";
+        
+        //Create a config file system and place this in there
+        String splitting_char = ",";
+        
+        try {
+            br = new BufferedReader(new FileReader(file_path));
+            while ((line = br.readLine()) != null) {
+            	String[] data = line.split(splitting_char);
 
-//
-//		//(System.getProperty("user.dir") + "\\" + "csv.txt")
-//        String csvFile = "C:\\Users\\i_ism\\eclipse-workspace\\Neural Network XOR\\src\\csv.txt";
-//        System.out.println(csvFile);
-//        String line = "";
-//        String cvsSplitBy = ",";
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-//
-//            while ((line = br.readLine()) != null) {
-//
-//                // use comma as separator
-//                String[] country = line.split(cvsSplitBy);
-//                for(int i = 0; i < country.length; i++) {
-//                	System.out.println(country[i]);
-//                }
-//
-//
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//	}
-	}	
+        		for (int i = 0; i < number_of_input_nodes ; i++) {
+        			input_arr[i] = Double.parseDouble(data[i]);
+        		}
+        		
+        		target_arr[0] = Double.parseDouble(data[10]);
+        		System.out.println(target_arr[0]);
+            }
+                	
+                			
+                		
+                	
+                
+            
+        
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();}
+	        
+        }
+	}
+	}
 }
