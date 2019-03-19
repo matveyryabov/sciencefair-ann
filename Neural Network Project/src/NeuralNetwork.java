@@ -51,7 +51,8 @@ public class NeuralNetwork {
 		Matrix input_m_t = Matrix.transposeMatrix(input_m.data);
 		
 		//Calculate the derivative of sigmoid
-		Matrix derivative_of_sigmoid_m = Matrix.map(output_m, x -> Matrix.dsigmoid(x));
+		//Change the var names to be more universal
+		Matrix derivative_of_sigmoid_m = Matrix.map(output_m, x -> Matrix.dsoftmax(x));
 		
 		//Calculate the gradient of the weights_ho matrix
 		Matrix gradient_of_weights_ho_m = Matrix.hadamardProduct(derivative_of_sigmoid_m, error_m);
@@ -71,7 +72,7 @@ public class NeuralNetwork {
 		Matrix hidden_error_m = Matrix.productOfTwoMatrices(weights_ho_t.data, error_m.data);
 		
 		//Recalculate the derivative of sigmoid
-		derivative_of_sigmoid_m = Matrix.map(hidden_output_m, x -> Matrix.dsigmoid(x));
+		derivative_of_sigmoid_m = Matrix.map(hidden_output_m, x -> Matrix.dsoftmax(x));
 		
 		//Calculate the gradient of the weights_oh matrix
 		Matrix gradient_of_weights_ih_m = Matrix.hadamardProduct(derivative_of_sigmoid_m, hidden_error_m);
@@ -87,7 +88,8 @@ public class NeuralNetwork {
 	Matrix feedForward(Matrix input_m, Matrix weights_m, Matrix bias_m) {
 		Matrix output_m = Matrix.productOfTwoMatrices(weights_m.data, input_m.data);
 		output_m = Matrix.addTwoMatrices(output_m.data, bias_m.data);
-		output_m = Matrix.map(output_m, x -> Matrix.sigmoid(x));
+		//output_m = Matrix.map(output_m, x -> Matrix.sigmoid(x));
+		output_m = Matrix.fromArray(Matrix.softmax(Matrix.toArray(output_m)));
 		return output_m;
 	}
 	
