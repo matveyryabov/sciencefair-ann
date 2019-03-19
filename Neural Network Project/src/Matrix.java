@@ -73,6 +73,32 @@ public class Matrix {
 		  return y * (1 - y);
 	  }
 	  
+	  static double[] softmax(double[] v) {
+		  for(int i = 0; i < v.length; i++) {
+			  v[i] = Math.exp(v[i]);
+		  }
+		  
+		  for(int i = 0; i < v.length; i++) {
+			  v[i] = v[i] / sumArray(v);
+		  }
+		  
+		  return v;
+	  }
+	  
+	  static double dsoftmax(double v_j) {
+		return v_j * (1- v_j);
+	  }
+	  
+	  static double sumArray(double[] arr) {
+		  double sum = 0;
+		  for(int i = 0; i < arr.length; i++) {
+			sum += arr[i];  
+		  }
+		  return sum;
+	  }
+	  
+	  
+	  
 //	
 //	  Learn about lambda expressions 
 //	  https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html
