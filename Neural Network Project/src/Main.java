@@ -42,7 +42,7 @@ public class Main {
         //Create a config file system and place this in there
         String splitting_char = ",";
         
-        for (int k = 0; k < 10; k++)
+        for (int k = 0; k < 1000; k++)
         {
         try {
             br = new BufferedReader(new FileReader(file_path));
@@ -60,13 +60,8 @@ public class Main {
 				
 				target_arr[(int) (Math.round(target_value[0]) -1)] = 1;
 				nn.train(input_arr, target_arr);
-				
-				
 
 				//System.out.println(target_arr[(int) (Math.round(target_value[0]) )]);
-				
-				
-				
 
             }
             
@@ -88,7 +83,7 @@ public class Main {
         		
 	}
         //TEST FILE
-    	String test_path = "C:\\Users\\david\\Documents\\sciencefair-ann-master-1\\sciencefair-ann-master\\csv3.csv";
+        String test_path = "C:\\Users\\david\\Documents\\sciencefair-ann-master-1\\sciencefair-ann-master\\csv3.csv";
     	try {
             br = new BufferedReader(new FileReader(test_path));
             while ((line = br.readLine()) != null) {
@@ -115,5 +110,4 @@ public class Main {
     	m = nn.feedForward(nn.feedForward(m, nn.weights_ih, nn.bias_h), nn.weights_ho, nn.bias_o);
     	Matrix.displayAsTable(m.data);
 	}
-	
 }

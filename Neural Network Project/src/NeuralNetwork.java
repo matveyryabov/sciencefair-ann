@@ -39,6 +39,7 @@ public class NeuralNetwork {
 		//Calculate the  output layer error
 		//Error = target - outputs
 	
+		//Ack look at this function name it sucks
 		Matrix error_m = Matrix.findDiffrence(target_m, output_m);
 		///
 		/// Change nottation to accept L1 L2
@@ -51,7 +52,7 @@ public class NeuralNetwork {
 		Matrix input_m_t = Matrix.transposeMatrix(input_m.data);
 		
 		//Calculate the derivative of sigmoid
-		//Change the var names to be more universal
+		//Change var names to be more universal
 		Matrix derivative_of_sigmoid_m = Matrix.map(output_m, x -> Matrix.dsoftmax(x));
 		
 		//Calculate the gradient of the weights_ho matrix
